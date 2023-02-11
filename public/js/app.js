@@ -5341,51 +5341,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      feedback: {
-        name: '',
-        phone: '',
-        text: ''
-      }
+      questions: null,
+      checkedNames: []
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+    axios.get('/api/v1/companies/index').then(function (response) {
+      return _this.questions = response.data;
+    });
+  },
   methods: {
-    saveForm: function saveForm() {
-      event.preventDefault();
-      var app = this;
-      var newFeedback = app.feedback;
-      axios.post('/api/v1/companies/create', newFeedback).then(function (resp) {
-        newFeedback.name = '';
-        newFeedback.phone = '';
-        newFeedback.text = '';
-        alert("Cообщение отправлено!");
-      })["catch"](function (resp) {
-        alert(resp);
-        console.log(resp);
-      });
+    checkRadio: function checkRadio(event) {
+      var rightAnswer1 = event.currentTarget.id;
+      var text = document.getElementById('text');
+      return this.radio == rightAnswer1 ? text.textContent = "правильный ответ" : text.textContent = "Неправильный ответ";
     }
   }
 });
@@ -28194,141 +28168,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render),
 /* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
 /* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "form-group" }),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [
-        _vm._v("Добавить сообщение"),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c(
-          "form",
-          {
-            on: {
-              submit: function ($event) {
-                return _vm.saveForm()
-              },
-            },
-          },
-          [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
-                _c("label", { staticClass: "control-label" }, [_vm._v("Имя")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.feedback.name,
-                      expression: "feedback.name",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.feedback.name },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.feedback, "name", $event.target.value)
-                    },
-                  },
-                }),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
-                _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Номер телефона"),
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.feedback.phone,
-                      expression: "feedback.phone",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.feedback.phone },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.feedback, "phone", $event.target.value)
-                    },
-                  },
-                }),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-xs-12 form-group" }, [
-                _c("label", { staticClass: "control-label" }, [
-                  _vm._v("Сообщение"),
-                ]),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.feedback.text,
-                      expression: "feedback.text",
-                    },
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.feedback.text },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.feedback, "text", $event.target.value)
-                    },
-                  },
-                }),
-              ]),
-            ]),
-            _vm._v(" "),
-            _vm._m(0),
-          ]
-        ),
-      ]),
-    ]),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-xs-12 form-group" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("\nОтправить\n")]
-        ),
-      ]),
-    ])
-  },
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 
